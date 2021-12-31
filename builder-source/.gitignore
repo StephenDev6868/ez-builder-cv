@@ -1,0 +1,11 @@
+.DS_Store
+private/
+
+**/node_modules/*
+!**/node_modules/grapesjs-swiper-slider
+!**/node_modules/grapesjs-custom-code
+!**/node_modules/grapesjs-component-countdown
+
+.eslintrc
+*.log
+_index.html

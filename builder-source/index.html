@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>GrapesJS Preset Webpage</title>
+    <link href="dist/grapesjs/builder.css" rel="stylesheet">
+    <script src="dist/grapesjs/builder.js"></script>
+    <link href="dist/customize.css" rel="stylesheet">
+    <script type="text/javascript">
+        var config = {
+            all_icons: ["fab fa-500px", "fab fa-accessible-icon", "fab fa-accusoft", "fab fa-acquisitions-incorporated", "fas fa-ad", "fas fa-address-book", "far fa-address-book", "fas fa-address-card"]
+        };
+        // langs builder for js
+        const langs_builder_js = {
+            'thin': "@lang('Thin')",
+            'extraLight': "@lang('Extra-Light')",
+            'light': "@lang('Light')",
+            'normal': "@lang('Normal')",
+            'medium': "@lang('Medium')",
+            'semiBold': "@lang('Semi-Bold')",
+            'bold': "@lang('Bold')",
+            'extraBold': "@lang('Extra-Bold')",
+            'ultraBold': "@lang('Ultra-Bold')",
+            'none': "@lang('none')",
+            'solid': "@lang('solid')",
+            'dotted': "@lang('dotted')",
+            'dashed': "@lang('dashed')",
+            'double': "@lang('double')",
+            'groove': "@lang('groove')",
+            'ridge': "@lang('ridge')",
+            'inset': "@lang('inset')",
+            'outset': "@lang('outset')",
+        };
+    </script>
+    <script src="dist/grapesjs-preset-webpage.min.js"></script>
+</head>
+
+<body>
+
+    <div id="gjs">
+     <h1>Hello 21321</h1>
+    </div>
+    
+    <script type="text/javascript">
+      var _token = '123213213';
+      var url_load_template = "load_template";
+    </script>
+    <script type="text/javascript">
+        
+        $( document ).ready(function() {
+              var editor = grapesjs.init({
+                  container: '#gjs',
+                  height: '100%',
+                  protectedCss: ` body {max-width: 210mm;min-height: 290mm;height:auto;margin: 20px auto;background: #fff;box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);}`,
+                  noticeOnUnload: true,
+                  storageManager: {
+                      autoload: 0
+                  },
+                  styleManager: {
+                      clearProperties: true,
+                  },
+                  cssIcons: null,
+                  fromElement: true,
+                  plugins: ['gjs-preset-webpage'],
+                  pluginsOpts: {
+                      'gjs-preset-webpage': {},
+                  }
+              });
+               editor.Panels.addPanel({
+                 id: 'myNewPanel',
+                 visible  : true,
+                 content: `
+                  <div>
+                    <label for="font-family">Font family:</label>
+                    <select name="font-family" id="font-family">
+                      <option value="Arial">Arial</option>
+                      <option value="Verdana">Verdana</option>
+                      <option value="Helvetica">Helvetica</option>
+                      <option value="Tahoma">Tahoma</option>
+                      <option value="Trebuchet MS">Trebuchet MS</option>
+                      <option value="Times New Roman">Times New Roman</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Garamond">Garamond</option>
+                      <option value="Courier New">Courier New</option>
+                      <option value="Brush Script MT">Brush Script MT</option>
+                    </select>
+                    <button id="change_templates">Change Templates</button>
+                  </div>`
+              });
+
+              // remove classs state-hover,click...
+              var classs_state = document.getElementById("gjs-clm-up");
+              if (classs_state) classs_state.remove();
+               // add default css on template font-awesome
+              const head = editor.Canvas.getDocument().head;
+              head.insertAdjacentHTML('beforeend', `
+                  <link rel="stylesheet" href="dist/font-awesome.css">`
+              );
+              // font-family change
+              $('#font-family').on('change', function() {
+                  var font = $(this).val();
+                  var string_font = "'" + font +  "'";
+                  editor.CssComposer.setRule('#rb-layout', {'font-family':  "'" + font +  "'" });
+              });
+              
+
+              // Modal template
+              var modal = document.getElementById("myModal");
+              $('span.close').on('click', function() {
+                  modal.style.display = "none";
+              });
+              $('#change_templates').on('click', function() {
+                  modal.style.display = "block";
+              });
+              window.onclick = function(event) {
+                if (event.target == modal) {
+                  modal.style.display = "none";
+                }
+              }
+
+              $('.card-template').on('click', function() {
+
+                    var templateid = $(this).attr("data-templateid");
+                    if (templateid) {
+                        $.ajax({
+                            type: "POST",
+                            url: url_load_template,
+                            data: {
+                                templateid: templateid,
+                                "_token": _token
+                            },
+                            success: function(response) {
+                              editor.setStyle(response.style);
+                              editor.setComponent(response.content);
+                            }
+                        });
+                    }
+              });
+
+        });
+
+       
+    </script>
+</body>
+
+</html>

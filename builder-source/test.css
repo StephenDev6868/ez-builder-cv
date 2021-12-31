@@ -1,0 +1,341 @@
+ body {
+     max-width: 210mm;
+     min-height: 290mm;
+     height: auto;
+     margin: 20px auto;
+     background: #fff;
+     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+ }
+
+ #rb-layout {
+     width: 100%;
+     max-width: 210mm;
+     background-image: initial;
+     background-position-x: initial;
+     background-position-y: initial;
+     background-size: initial;
+     background-repeat-x: initial;
+     background-repeat-y: initial;
+     background-attachment: initial;
+     background-origin: initial;
+     background-clip: initial;
+     background-color: rgb(63, 149, 153);
+     padding-top: 0px;
+     padding-right: 0px;
+     padding-bottom: 0px;
+     padding-left: 0px;
+     box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 1px -2px, rgba(0, 0, 0, 0.14) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+ }
+
+ #rb-main {
+     font-size: 14px;
+     line-height: 24px;
+     display: flex;
+     flex-wrap: nowrap;
+ }
+
+ #rb-left .rb-block {
+     margin-bottom: 30px;
+ }
+
+ #rb-left {
+     width: 28%;
+     padding-top: 10px;
+     padding-right: 5px;
+     padding-bottom: 10px;
+     padding-left: 5px;
+     color: rgb(255, 255, 255);
+     background-image: initial !important;
+     background-position-x: initial !important;
+     background-position-y: initial !important;
+     background-size: initial !important;
+     background-repeat-x: initial !important;
+     background-repeat-y: initial !important;
+     background-attachment: initial !important;
+     background-origin: initial !important;
+     background-clip: initial !important;
+     background-color: rgb(17, 130, 178) !important;
+ }
+
+ #rb-content {
+     width: 72%;
+     background-image: initial;
+     background-position-x: initial;
+     background-position-y: initial;
+     background-size: initial;
+     background-repeat-x: initial;
+     background-repeat-y: initial;
+     background-attachment: initial;
+     background-origin: initial;
+     background-clip: initial;
+     background-color: rgb(255, 255, 255);
+ }
+
+ #rb-content .rb-content-main {
+     padding-top: 10px;
+     padding-right: 0px;
+     padding-bottom: 10px;
+     padding-left: 5px;
+ }
+
+ #rb-content-top {
+     color: rgb(0, 0, 0);
+     background-image: initial;
+     background-position-x: initial;
+     background-position-y: initial;
+     background-size: initial;
+     background-repeat-x: initial;
+     background-repeat-y: initial;
+     background-attachment: initial;
+     background-origin: initial;
+     background-clip: initial;
+     background-color: rgb(78, 179, 229);
+     padding-bottom: 10px;
+ }
+
+ #rb-content .rb-block {
+     position: relative;
+     padding-top: 5px;
+     padding-right: 10px;
+     padding-bottom: 5px;
+     padding-left: 10px;
+ }
+
+ #rb-left .rb-box-content {
+     padding-bottom: 0px;
+     margin-top: 0px;
+     margin-right: 0px;
+     margin-bottom: 0px;
+     margin-left: 0px;
+ }
+
+ #rb-content-top h1 {
+     font-size: 32px;
+     margin-top: 0px;
+     margin-right: 0px;
+     margin-bottom: 0px;
+     margin-left: 0px;
+     padding-top: 10px;
+     padding-right: 5px;
+     padding-bottom: 10px;
+     padding-left: 5px;
+     line-height: normal;
+     text-transform: uppercase;
+     text-align: center;
+     font-weight: 700;
+ }
+
+ #rb-content-top h1 span {
+     color: rgb(255, 255, 255);
+     display: block;
+ }
+
+ #rb-content-top h2 {
+     margin-top: 0px;
+     margin-right: 0px;
+     margin-left: 0px;
+     margin-bottom: 12px;
+     color: rgb(255, 255, 255);
+     text-align: center;
+     font-style: italic;
+     font-weight: 600;
+ }
+
+ .box-name p {
+     overflow-x: hidden;
+     overflow-y: hidden;
+ }
+
+ #rb-content p {
+     margin-bottom: 5px;
+ }
+
+ #rb-left .h3 {
+     font-size: 18px;
+     font-weight: bold;
+     margin-top: 0px;
+     text-transform: uppercase;
+     text-align: center;
+ }
+
+ #rb-content .head {
+     font-size: 18px;
+     color: rgb(47, 58, 64);
+     padding-bottom: 5px;
+     font-weight: bold;
+     margin-top: 0px;
+     text-transform: uppercase;
+ }
+
+ #rb-content h3 {
+     font-weight: bold;
+     font-size: 14px;
+     line-height: 30px;
+     margin-bottom: 10px;
+     color: rgb(51, 51, 51);
+ }
+
+ #rb-left .h3 span {
+     padding-top: 0px;
+     padding-right: 15px;
+     padding-bottom: 0px;
+     padding-left: 15px;
+ }
+
+ #rb-content span[contenteditable] {
+     display: inline-block;
+     padding-right: 15px;
+     padding-left: 15px;
+ }
+
+ #rb-left .h3:first-child {
+     margin-top: 0px;
+ }
+
+ .rb-box-content {
+     margin-bottom: 25px;
+     padding-left: 15px;
+     position: relative;
+ }
+
+ #rb-box-ava {
+     text-align: center;
+     padding-top: 2px;
+     padding-right: 2px;
+     padding-bottom: 2px;
+     padding-left: 2px;
+     margin-bottom: 10px;
+ }
+
+ #rb-box-ava img {
+     padding-top: 0px;
+     padding-right: 0px;
+     padding-bottom: 0px;
+     padding-left: 0px;
+     border-top-width: 0px;
+     border-right-width: 0px;
+     border-bottom-width: 0px;
+     border-left-width: 0px;
+     border-top-style: initial;
+     border-right-style: initial;
+     border-bottom-style: initial;
+     border-left-style: initial;
+     border-top-color: initial;
+     border-right-color: initial;
+     border-bottom-color: initial;
+     border-left-color: initial;
+     border-image-source: initial;
+     border-image-slice: initial;
+     border-image-width: initial;
+     border-image-outset: initial;
+     border-image-repeat: initial;
+     width: 150px;
+     height: 150px;
+ }
+
+ .bar-exp span {
+     display: block;
+     height: 8px;
+     background-image: initial;
+     background-position-x: initial;
+     background-position-y: initial;
+     background-size: initial;
+     background-repeat-x: initial;
+     background-repeat-y: initial;
+     background-attachment: initial;
+     background-origin: initial;
+     background-clip: initial;
+     background-color: rgb(217, 217, 217);
+ }
+
+ .icoweb label {
+     display: block;
+     color: rgb(98, 126, 136);
+ }
+
+ .icoweb span {
+     display: block;
+ }
+
+ .box-contact {
+     font-size: 13px;
+     margin-left: 5px;
+     padding-top: 0px;
+ }
+
+ .icoweb i.fa {
+     width: 20px;
+     height: 20px;
+     background-color: rgb(255, 255, 255);
+     border-top-left-radius: 50%;
+     border-top-right-radius: 50%;
+     border-bottom-right-radius: 50%;
+     border-bottom-left-radius: 50%;
+     display: inline-block;
+     text-align: center;
+     font-size: 13px;
+     line-height: 20px;
+     margin-right: 10px;
+     margin-top: 3px;
+     float: left;
+     color: rgb(47, 58, 64) !important;
+ }
+
+ .head i {
+     font-size: 25px;
+     margin-right: 10px;
+ }
+
+ .exp-content {
+     padding-left: 15px;
+ }
+
+ #rb-content span.exp-date {
+     float: right;
+ }
+
+ .icon_fa i.fa {
+     font-size: 20px;
+     border-top-width: 1px;
+     border-right-width: 1px;
+     border-bottom-width: 1px;
+     border-left-width: 1px;
+     border-top-style: solid;
+     border-right-style: solid;
+     border-bottom-style: solid;
+     border-left-style: solid;
+     border-top-color: rgb(255, 255, 255);
+     border-right-color: rgb(255, 255, 255);
+     border-bottom-color: rgb(255, 255, 255);
+     border-left-color: rgb(255, 255, 255);
+     border-image-source: initial;
+     border-image-slice: initial;
+     border-image-width: initial;
+     border-image-outset: initial;
+     border-image-repeat: initial;
+     border-top-left-radius: 50%;
+     border-top-right-radius: 50%;
+     border-bottom-right-radius: 50%;
+     border-bottom-left-radius: 50%;
+     padding-top: 5px;
+     padding-right: 5px;
+     padding-bottom: 5px;
+     padding-left: 5px;
+     width: 20px;
+     color: white;
+     background-image: initial;
+     background-position-x: initial;
+     background-position-y: initial;
+     background-size: initial;
+     background-repeat-x: initial;
+     background-repeat-y: initial;
+     background-attachment: initial;
+     background-origin: initial;
+     background-clip: initial;
+     background-color: rgb(255, 255, 255);
+     margin-bottom: 5px;
+ }
+
+ p.head i.fa {
+     float: left;
+ }

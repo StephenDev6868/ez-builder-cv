@@ -1,0 +1,14 @@
+{
+    "name": "ResumeCV",
+    "alias": "resumecv",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\ResumeCV\\Providers\\ResumeCVServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/resumecv",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ResumeCV\\Providers\\ResumeCVServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ResumeCV\\": ""
+        }
+    }
+}
