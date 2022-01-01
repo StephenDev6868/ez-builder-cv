@@ -17,22 +17,6 @@
                                 @lang('Your Info')
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#tab_password" data-toggle="tab">
-                                @lang('Password and Email')
-                            </a>
-                        </li>
-                        @php
-                            $views_render = accountSettingPayments(['user' => $user]);
-                        @endphp
-
-                        @if(!empty($views_render))
-                            <li class="nav-item">
-                                <a class="nav-link" href="#tab_payment_setting" data-toggle="tab">
-                                    @lang('Payment Settings')
-                                </a>
-                            </li>
-                        @endif
                     </ul>
                 </div>
                 
@@ -40,11 +24,35 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_user_info">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">@lang('Your Name')</label>
                                         <input type="text" name="name" value="{{ $user->name }}" class="form-control" placeholder="@lang('Your name')">
                                     </div>
+                                    
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">@lang('Mobile Phone')</label>
+                                        <input type="text" name="mobile_phone" value="{{ $user->mobile_phone }}" class="form-control" placeholder="@lang('Mobile Phone')">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">@lang('Email')</label>
+                                        <input type="email" value="{{ $user->email }}" class="form-control disabled" placeholder="E-mail" disabled>
+                                        <small class="help-block">@lang("E-mail can't be changed")</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label">@lang('High school name')</label>
+                                        <input type="text" name="high_school_name" value="{{ $user->high_school_name }}" class="form-control" placeholder="@lang('High school name')">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">@lang('Gender')</label>
                                         <select name="gender" class="form-control" id="">
@@ -53,11 +61,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">@lang('High school name')</label>
-                                        <input type="text" name="high_school_name" value="{{ $user->high_school_name }}" class="form-control" placeholder="@lang('High school name')">
-                                    </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">@lang('Grade')</label>
                                         <select name="grade" class="form-control" id="">
@@ -67,38 +71,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                             </div>
                             <hr>
-                        </div>
-                        <div class="tab-pane" id="tab_password">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">@lang('Email')</label>
-                                        <input type="email" value="{{ $user->email }}" class="form-control disabled" placeholder="E-mail" disabled>
-                                        <small class="help-block">@lang("E-mail can't be changed")</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">@lang('Password')</label>
-                                        <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" placeholder="@lang('Password')">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">@lang('Confirm password')</label>
-                                        <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password_confirmation" placeholder="@lang('Confirm password')">
-                                    </div>
-                                    <div class="alert alert-info">
-                                        @lang('Type new password if you would like to change current password.')
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                        <div class="tab-pane" id="tab_payment_setting">
-                            @if(!empty($views_render))
-                                {!! $views_render !!}
-                            @endif
                         </div>
                     </div>
                 </div>

@@ -473,5 +473,8 @@
     "Role User": "",
     "Admin": "",
     "Export CSV": "",
-    "Role": ""
+    "Role": "",
+    "You need update email on: ": "",
+    "You need update name, mobile phone, gender, senior high school name, before create a resume": "",
+    "Mobile Phone": ""
 }

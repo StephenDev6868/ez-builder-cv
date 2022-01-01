@@ -17,15 +17,21 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">@lang('Name')</label>
                                 <input type="text" name="name" value="{{ $user->name }}" class="form-control" placeholder="@lang('Name')">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label class="form-label">@lang('E-mail')</label>
+                                <label class="form-label">@lang('Mobile Phone')</label>
+                                <input type="text" name="mobile_phone" value="{{ $user->mobile_phone }}" class="form-control" placeholder="@lang('Mobile Phone')">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">@lang('Email')</label>
                                 <input type="email" name="email" value="{{ $user->email }}" class="form-control" placeholder="@lang('E-mail')">
                             </div>
                         </div>

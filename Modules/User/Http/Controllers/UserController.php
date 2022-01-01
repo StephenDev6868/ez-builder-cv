@@ -154,10 +154,39 @@ class UserController extends Controller
 
     public function accountSettings(Request $request)
     {
-
         $user = $request->user();
         return view('user::auth.profile', compact(
             'user'));
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = $request->user();
+        return view('user::auth.change-password', compact(
+            'user'));
+    }
+
+    public function changePasswordUpdate(Request $request)
+    {
+        $user = $request->user();
+        $request->validate([
+            'old_password'     => 'required',
+            'password' => 'same:password_confirmation',
+        ]);
+        $check = Hash::check($request->old_password, $user->password);
+        if(!$check){
+            return redirect()->route('changepassword')
+            ->with('error', __('The old password wrong'));
+        }
+
+        $request->request->add([
+            'password' => Hash::make($request->password),
+        ]);
+        
+        $request->user()->update($request->all());
+
+        return redirect()->route('changepassword')
+            ->with('success', __('Updated successfully'));
     }
 
     public function accountSettingsUpdate(Request $request)
@@ -166,59 +195,15 @@ class UserController extends Controller
         $request->validate([
             'name'     => 'required|max:255',
             'gender'     => 'required|max:20',
+            'mobile_phone' => 'required|max:20',
             'high_school_name'     => 'required|max:190',
             'grade'     => 'required|max:50',
-            'password' => 'same:password_confirmation',
         ]);
-
-        if ($request->filled('password')) {
-            $request->request->add([
-                'password' => Hash::make($request->password),
-            ]);
-        } else {
-            $request->request->remove('password');
-        }
 
         $request->user()->update($request->all());
 
         return redirect()->route('accountsettings.index')
             ->with('success', __('Updated successfully'));
-    }
-
-    public function exportCsadsasv(Request $request)
-    {
-        $filename = 'userdata-'.strtotime("now").'.csv';
-        $data = User::all();
-
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
-
-        $columns = array('Name', 'Email', 'Role', 'Gender', 'High school name', 'Grade', 'Created at');
-
-        $callback = function() use($data, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            foreach ($data as $item) {
-                $row['Name']  = $item->name;
-                $row['Email']    = $item->email;
-                $row['Role']    = $item->role;
-                $row['High school name']  = $item->high_school_name;
-                $row['Grade']  = $item->grade;
-                $row['Created at']  = $item->created_at;
-
-                fputcsv($file, array($row['Name'],$row['Email'],$row['Role'], ));
-            }
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
     }
 
     public function exportcsv(Request $request)
@@ -230,7 +215,7 @@ class UserController extends Controller
             
             $handle = fopen($filename, 'w+');
             
-            $columns = ['Name', 'Email', 'Role', 'Gender', 'High_school_name', 'Grade', 'Created_at'];
+            $columns = ['Name', 'Email', 'Mobile-Phone' , 'Role', 'Gender', 'High_school_name', 'Grade', 'Created_at'];
 
             fputcsv($handle, $columns);
 
@@ -238,6 +223,7 @@ class UserController extends Controller
                 $row = [];
                 $row['name']  = $item->name ? $item->name : '';
                 $row['email']    = $item->email ? $item->email : '';
+                $row['mobile_phone']    = $item->mobile_phone ? $item->mobile_phone : '';
                 $row['role']    = $item->role ? $item->role : '';
                 $row['gender']    = $item->gender ? $item->gender : '';
                 $row['high_school_name']  = $item->high_school_name ? $item->high_school_name : '';

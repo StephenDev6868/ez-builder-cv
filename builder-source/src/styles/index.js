@@ -33,14 +33,9 @@ export default (editor, config) => {
                 defaults: '400',
                 list: [
                     { value: '100', name: langs.thin },
-                    { value: '200', name: langs.extraLight },
                     { value: '300', name: langs.light },
                     { value: '400', name: langs.normal },
-                    { value: '500', name: langs.medium },
-                    { value: '600', name: langs.semiBold},
                     { value: '700', name: langs.bold},
-                    { value: '800', name: langs.extraBold },
-                    { value: '900', name: langs.ultraBold },
                 ]
             },
             {

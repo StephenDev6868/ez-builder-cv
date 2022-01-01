@@ -1,7 +1,7 @@
 @can('admin')
 <li class="nav-item">
 	@php 
-		$sub_menu = ["settings.index","settings.localization","settings.email","settings.integrations","settings.manage-ads"];
+		$sub_menu = ["settings.index","settings.localization","settings.email","settings.integrations","settings.manage-ads", "settings.help-page"];
 	@endphp
 	<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fas fa-fw fa-cog"></i><span>@lang('Website settings')</span>
 	</a>
@@ -9,9 +9,6 @@
 		<div class="bg-white py-2 collapse-inner rounded">
 			<a class="collapse-item {{ routeName() == 'settings.index' ? 'active' : '' }}" href="{{ route('settings.index') }}">
 				<span>@lang('General settings')</span>
-			</a>
-			<a class="collapse-item {{ routeName() == 'settings.manage-ads' ? 'active' : '' }}" href="{{ route('settings.manage-ads') }}">
-				<span>@lang('Manage Ads')</span>
 			</a>
 			<a class="collapse-item {{ routeName() == 'settings.help-page' ? 'active' : '' }}" href="{{ route('settings.help-page') }}">
 				<span>@lang('Help page')</span>

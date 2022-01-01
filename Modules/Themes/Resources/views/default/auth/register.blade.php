@@ -17,9 +17,6 @@
       <form class="actionLogin mb-2" action="{{ route('register') }}" method="post">
         @csrf
         <div class="form-group first">
-          <input class="form-control" type="text" name="name"  value="{{ old('name') }}" placeholder="@lang('Enter name')" required="">
-        </div>
-        <div class="form-group first">
           <input class="form-control" type="text" name="email" value="{{ old('email') }}" placeholder="@lang('E-Mail Address')" required="">
         </div>
         <div class="form-group first">

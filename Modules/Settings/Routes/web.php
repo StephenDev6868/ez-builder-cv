@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 		Route::get('/cacheclear', 'SettingsController@cacheClear')->name('cacheclear');
 		Route::get('/syncmissingtranslationkeys', 'SettingsController@syncMissingTranslationKeys')->name('syncMissingTranslationKeys');
 		Route::get('/updateversion', 'SettingsController@updateVersion')->name('updateVersion');
+		Route::post('content-admin/upload-image', 'SettingsController@upload_image')->name('content-admin.upload_image');
+
 
 	});
 });

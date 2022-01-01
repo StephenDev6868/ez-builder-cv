@@ -41,17 +41,21 @@
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         @can('admin')
         <a class="dropdown-item" href="{{ route('settings.index') }}">
-          <i class="fas fa-user-secret"></i>
+          <i class="fas fa-user-secret"></i> 
           @lang('Administrator')
         </a>
         @endcan
         <a class="dropdown-item" href="{{ route('accountsettings.index') }}">
-          <i class="fas fa-user"></i>
+          <i class="fas fa-user"></i> 
           @lang('Account Settings')
+        </a>
+        <a class="dropdown-item" href="{{ route('changepassword') }}">
+          <i class="fas fa-key"></i> 
+          @lang('Change password')
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('logout') }}">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fas fa-sign-out-alt"></i> 
           @lang('Logout')
         </a>
       </div>

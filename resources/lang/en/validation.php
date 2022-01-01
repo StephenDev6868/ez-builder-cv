@@ -114,8 +114,17 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
      */
-
-    'attributes'           => [],
+    'attributes' => [
+        'high_school_name' => 'High school name',
+        'mobile_phone' => 'Mobile Phone',
+        'grade' => 'Grade',
+        'name' => 'Name',
+        'grade' => 'Grade',
+        'gender' => 'Gender',
+        'password' => 'Password',
+        'old_password' => 'Old password',
+        'password_confirmation' => 'Confirmation Password',
+    ],
 
     'recaptcha'            => 'Captcha is not verified!',
 

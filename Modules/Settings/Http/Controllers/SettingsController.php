@@ -198,8 +198,29 @@ class SettingsController extends Controller
         return back()->with('success', __('Settings saved successfully'));
     }
 
+    public function upload_image(Request $request)
+    {
+        $image = $request->file('file');
+        if ($image != '')
+        {
+            $request->validate([
+                'file' => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000', ], 
+                ['file.mimes' => __('The :attribute must be an jpg,jpeg,png,svg') , ]
+            );
+            $path_folder = public_path('storage/contents');
+
+            $image_name = "image_" . rand() . '.' . $image->getClientOriginalExtension();
+            $image->move($path_folder , $image_name);
+
+            return response()->json([
+                'location' => asset('/storage/contents/' . $image_name)
+            ]);
+        }
+        abort(422);
+    }
+
     public function updateVersion(){
-        set_time_limit(900); // 15 minutes
+        //set_time_limit(900); // 15 minutes
         Artisan::call('migrate', ["--force" => true]);
         Artisan::call('module:publish');
         Artisan::call('translation:sync-missing-translation-keys');

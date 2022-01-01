@@ -45,7 +45,7 @@ class ResumeCVController extends Controller
         if ($request->filled('search')) {
             $data->where('name', 'like', '%' . $request->search . '%');
         }
-        $data = $data->paginate(5);
+        $data = $data->paginate(15);
 
         return view('resumecv::resumecv.user_resumecvs', compact(
             'data'
@@ -62,9 +62,9 @@ class ResumeCVController extends Controller
     {
         // Check required info name, gender, senior high school name, grade
         $user = $request->user();
-        if(!$user->name || !$user->gender || !$user->high_school_name || !$user->grade){
+        if(!$user->name || !$user->mobile_phone || !$user->gender || !$user->high_school_name || !$user->grade){
             return redirect()->route('accountsettings.index')
-            ->with('error', __('You need update name, gender, senior high school name, before create a resume'));
+            ->with('error', __('You need update name, mobile phone, gender, senior high school name, before create a resume'));
         }
         
         $request->validate(['name' => 'required|max:255', 'template_id' => 'required']);
