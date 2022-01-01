@@ -1,3 +1,7 @@
+INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `password`, `package_id`, `package_ends_at`, `settings`, `remember_token`, `created_at`, `updated_at`, `gender`, `high_school_name`, `grade`, `mobile_phone`) VALUES
+(1, 'admin', 'admin123', 'admin@admin.com', NULL, '$2y$10$egTAQeVdI3W0ty7NNqDx1.ZKvvf.R3XFa.33wBwmV54DkvZQ6UPvu', NULL, NULL, NULL, 'ZRsGdn1ywmvf5FHwjxmKCCpqJhyDIXLwIfyoQkvXcTYEbSzg0GLaCrcwm2hf', '2021-10-03 02:07:33', '2021-12-31 14:25:12', 'male', 'Ok', 'grade_one', 'dsadsadsa');
+
+
 INSERT INTO `resumecvcategories` VALUES
 (4, 'Resumes', NULL, NULL, '2021-05-31 14:19:02', '2021-05-31 14:19:17'),
 (5, 'Cvs', NULL, NULL, '2021-06-05 19:12:15', '2021-06-05 19:12:15');
