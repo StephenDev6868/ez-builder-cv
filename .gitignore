@@ -12,7 +12,6 @@
 /resources/lang/vi/
 /resources/lang/vi.json
 /storage/*.key
-/storage/installed
 /storage/upgrade/*
 /storage/logs/*
 /vendor
