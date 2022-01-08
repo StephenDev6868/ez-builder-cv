@@ -13,7 +13,7 @@ use Modules\LandingPage\Entities\LandingPage;
 if (!function_exists('getDomainFromURL')) {
     function getDomainFromURL($url) {
         $parse = parse_url($url);
-        return $parse['host']; 
+        return $parse['host'];
     }
 }
 
@@ -98,13 +98,13 @@ if (!function_exists('getColorStatus')) {
                 return "primary";
 
                 break;
-            
+
             case 'COMPLETED':
                 # code..
                 return "success";
 
                 break;
-            
+
             case 'CANCELED':
                 # code...
                 return "danger";
@@ -123,7 +123,7 @@ if (!function_exists('getValueIfKeyIsset')) {
     function getValueIfKeyIsset($array, $key) {
 
         if (isset($array[$key])) {
-            
+
             if (is_numeric($array[$key])) {
                 return intval($array[$key]);
             }
@@ -149,9 +149,9 @@ if (!function_exists('checkIssetAndNotEmptyKeys')) {
 if (!function_exists('getLandingPageCurrentURL')) {
 
     function getLandingPageCurrentURL(LandingPage $page) {
-        
+
         $url = "http://";
-        
+
         if ($page) {
             if ($page->domain_type == 0) {
                 $url .= $page->sub_domain;
@@ -188,9 +188,9 @@ if (!function_exists('publishLangModule')) {
     function publishLangModule($name_module = "") {
 
         if(!empty($name_module)) {
-            
+
             $module = Module::find($name_module);
-            
+
             if (!$module) {
 
                 return false;
@@ -199,7 +199,7 @@ if (!function_exists('publishLangModule')) {
             $path_lang_module = $module->getPath().'/Resources'.'/lang/en';
 
             if(File::exists($path_lang_module)) {
-                
+
                 File::copyDirectory($path_lang_module, resource_path('lang/en'));
 
             }
@@ -212,9 +212,9 @@ if (!function_exists('publishLangModule')) {
             foreach ($all_modules as $item) {
 
                 $path_lang_module = $item->getPath().'/Resources'.'/lang/en';
-                
+
                 if(File::exists($path_lang_module)) {
-                    
+
                     File::copyDirectory($path_lang_module, resource_path('lang/en'));
 
                 }
@@ -227,7 +227,7 @@ if (!function_exists('publishLangModule')) {
 if (!function_exists('getAllJSModules')) {
 
     function getAllAssetsModulesForApp($type = '') {
-        
+
         // publish lang all module
         $html = "";
         $types_arr = array("css", "js");
@@ -239,7 +239,7 @@ if (!function_exists('getAllJSModules')) {
         foreach ($all_modules as $module) {
 
             $path_assets = $module->getPath().'/Resources'.'/assets/app/'.$type;
-            
+
             if(File::exists($path_assets)) {
 
                 $files = File::allfiles($path_assets);
@@ -254,7 +254,7 @@ if (!function_exists('getAllJSModules')) {
                         elseif($type == "js"){
                             $html .= "<script src=".Module::asset($module->getLowerName().':app/js/'.$item->getFilename())." ></script>\n";
                         }
-                        
+
                     }
                 }
             }
@@ -284,7 +284,7 @@ if(!function_exists("get_latest_version_product_id")){
         if ($response['status'] == true) {
             return $response;
         }
-        
+
         return false;
     }
 }
@@ -314,9 +314,9 @@ if(!function_exists("get_color_chart_count")){
 
     function get_color_chart_count($count = 0)
     {
-        
+
         $items = ["#4353FF", "#1cc88a", "#36b9cc", "#f6c23e", "#e74a3b","#5a5c69", "#3366cc","#dc3912","#ff9900","#109618","#990099","#0099c6","#dd4477","#66aa00","#b82e2e","#316395","#3366cc","#994499","#22aa99","#aaaa11","#6633cc","#e67300","#8b0707","#651067","#329262","#5574a6","#3b3eac","#b77322","#16d620","#b91383","#f4359e","#9c5935","#a9c413","#2a778d","#668d1c","#bea413","#0c5922","#743411"];
-        
+
         $output = array_slice($items, 0, $count);
 
         return $output;
@@ -329,7 +329,7 @@ if(!function_exists("get_color_chart_count")){
 if(!function_exists("getDeviceTracking")){
 
     function getDeviceTracking($tracking){
-        
+
         if($tracking->isMobile()){
 
             return "Mobile";
@@ -339,7 +339,7 @@ if(!function_exists("getDeviceTracking")){
             return "Tablet";
         }
         elseif($tracking->isDesktop()){
-            
+
             return "Desktop";
         }
         else{
@@ -369,7 +369,7 @@ if(!function_exists("get_option")){
 
         }
         return $value;
-        
+
     }
 }
 
@@ -409,9 +409,9 @@ if (!function_exists('getPaymentsvailable')) {
                     }
 
                 }
-                
+
             }
-           
+
         }
         return $payments;
     }
@@ -430,13 +430,13 @@ if (!function_exists('accountSettingPayments')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-account-payment') && !empty($menu_config['account_payment_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['account_payment_position'] = $menu_config['account_payment_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -445,9 +445,9 @@ if (!function_exists('accountSettingPayments')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-account-payment',compact('data'))->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-account-payment',compact('data'))->render();
             }
-                
+
         }
         return $html;
     }
@@ -464,13 +464,13 @@ if (!function_exists('settingPayments')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-setting-payment') && !empty($menu_config['setting_payment_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['setting_payment_position'] = $menu_config['setting_payment_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -479,9 +479,9 @@ if (!function_exists('settingPayments')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-setting-payment')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-setting-payment')->render();
             }
-                
+
         }
         return $html;
     }
@@ -497,13 +497,13 @@ if (!function_exists('paymentSkins')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-payment-skins') && !empty($menu_config['payment_skins_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['payment_skins_position'] = $menu_config['payment_skins_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -512,9 +512,9 @@ if (!function_exists('paymentSkins')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-payment-skins',compact('data'))->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-payment-skins',compact('data'))->render();
             }
-                
+
         }
         return $html;
     }
@@ -530,13 +530,13 @@ if (!function_exists('menuHeaderSkins')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-header-skins') && !empty($menu_config['header_skins_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['header_skins_position'] = $menu_config['header_skins_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -545,9 +545,9 @@ if (!function_exists('menuHeaderSkins')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-header-skins')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-header-skins')->render();
             }
-                
+
         }
         return $html;
     }
@@ -565,7 +565,7 @@ if (!function_exists('menuBottomSkins')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-bottom-skins') && !empty($menu_config['bottom_skins_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['bottom_skins_position'] = $menu_config['bottom_skins_position'];
@@ -580,9 +580,9 @@ if (!function_exists('menuBottomSkins')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-bottom-skins',compact('data'))->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-bottom-skins',compact('data'))->render();
             }
-                
+
         }
         return $html;
     }
@@ -593,21 +593,22 @@ if (!function_exists('menuSiderbar')) {
 
     function menuSiderbar($data = []) {
         $modules = Module::all();
+        //dd($modules);
         $html = "";
         $config_module = [];
         $modules_sort = [];
         if ($modules) {
-            
+
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-sidebar') && !empty($menu_config['siderbar_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['siderbar_position'] = $menu_config['siderbar_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -616,9 +617,9 @@ if (!function_exists('menuSiderbar')) {
 
             // get view Template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-sidebar')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-sidebar')->render();
             }
-                
+
         }
         return $html;
     }
@@ -636,13 +637,13 @@ if (!function_exists('menuAdminSettingSiderbar')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-sidebar-admin') && !empty($menu_config['siderbar_admin_position'])){
                     $tmp['name'] = $name_module;
                     $tmp['siderbar_admin_position'] = $menu_config['siderbar_admin_position'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -651,9 +652,9 @@ if (!function_exists('menuAdminSettingSiderbar')) {
 
             // get view template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-sidebar-admin')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-sidebar-admin')->render();
             }
-                
+
         }
         return $html;
     }
@@ -670,13 +671,13 @@ if (!function_exists('menuHeaderTopLeft')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-header-top-left') && !empty($menu_config['header_top_left'])){
                     $tmp['name'] = $name_module;
                     $tmp['header_top_left'] = $menu_config['header_top_left'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -685,9 +686,9 @@ if (!function_exists('menuHeaderTopLeft')) {
 
             // get view template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-header-top-left')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-header-top-left')->render();
             }
-                
+
         }
         return $html;
     }
@@ -704,13 +705,13 @@ if (!function_exists('menuHeaderTop')) {
             foreach ($modules as $module) {
                 $name_module = $module->getLowerName();
                 $menu_config = config($name_module.'.menu');
-                
+
                 if(view()->exists($name_module.'::moduletemplates.module-header-top') && !empty($menu_config['header_top'])){
                     $tmp['name'] = $name_module;
                     $tmp['header_top'] = $menu_config['header_top'];
                     $modules_sort[] =  $tmp;
                 }
-                
+
             }
             // sort
             usort($modules_sort, function ($item1, $item2) {
@@ -719,9 +720,9 @@ if (!function_exists('menuHeaderTop')) {
 
             // get view template
             foreach ($modules_sort as $item) {
-                $html .= view($item['name'].'::moduletemplates.module-header-top')->render(); 
+                $html .= view($item['name'].'::moduletemplates.module-header-top')->render();
             }
-                
+
         }
         return $html;
     }
@@ -754,7 +755,7 @@ if (!function_exists('getAllImagesContentMedia')) {
             $images_url[] = URL::to('/storage/content_media')."/".$item->getFilename();
         }
         return $images_url;
-        
+
     }
 }
 
@@ -772,7 +773,7 @@ if (!function_exists('getAllImagesUser')) {
             $images_url[] = URL::to('/storage/user_storage/'.$user_id)."/".$item->getFilename();
         }
         return $images_url;
-        
+
     }
 }
 if (!function_exists('getAllContentTemplate')) {
@@ -786,7 +787,7 @@ if (!function_exists('getAllContentTemplate')) {
             $images_url[] = URL::to('/storage/content_media')."/".$item->getFilename();
         }
         return $images_url;
-        
+
     }
 }
 if (!function_exists('replaceVarContentStyle')) {
@@ -810,8 +811,8 @@ if (!function_exists('replaceVarContentStyle')) {
             if (isset($item->thank_you_style)) {
                 $temp->thank_you_style = str_replace('##image_url##', $image_url, $item->thank_you_style);
             }
-            
-            
+
+
         }
         else{
             if (isset($item)) {
@@ -866,7 +867,7 @@ if (!function_exists('cleanImages')) {
     }
 }
 if (!function_exists('deleteImageWithPath')) {
-    
+
     function deleteImageWithPath($path_delete){
 
         if(File::exists($path_delete)) {
@@ -875,7 +876,7 @@ if (!function_exists('deleteImageWithPath')) {
     }
 }
 if (!function_exists('setEnv')) {
-    
+
     function setEnv($data)
     {
         if (empty($data) || !is_array($data) || !is_file(base_path('.env'))) {
@@ -1001,10 +1002,10 @@ if (!function_exists('change_file_json')) {
     function change_file_json($file, $key_change, $value_change)
     {
         $jsonString = file_get_contents($file);
-        
+
         $data = json_decode($jsonString, true);
         $data[$key_change] = $value_change;
-        
+
         $newJsonString = json_encode($data);
 
         file_put_contents($file, $newJsonString);

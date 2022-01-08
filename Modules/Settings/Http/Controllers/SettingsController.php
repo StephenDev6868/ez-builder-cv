@@ -26,7 +26,7 @@ class SettingsController extends Controller
     {
 
 
-        return view('settings::settings.dashboard', 
+        return view('settings::settings.dashboard',
         );
 
     }
@@ -48,12 +48,12 @@ class SettingsController extends Controller
         $time_zones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
         $languages = $this->translation->allLanguages();
         $currencies      = config('currencies');
-        
+
         $CURRENCY_CODE = config('app.CURRENCY_CODE');
         $CURRENCY_SYMBOL = config('app.CURRENCY_SYMBOL');
         $APP_TIMEZONE = config('app.timezone');
         $APP_LOCALE = config('app.APP_LOCALE');
-        
+
         return view('settings::settings.localization', compact(
             'CURRENCY_CODE',
             'CURRENCY_SYMBOL',
@@ -79,7 +79,7 @@ class SettingsController extends Controller
     {
         return view('settings::settings.help-page');
     }
-    
+
 
     public function integrations(Request $request)
     {
@@ -122,14 +122,14 @@ class SettingsController extends Controller
 
             case 'ads':
                 break;
-            
+
             case 'help-page':
                 break;
 
             default:
-            
+
                 $message_mimes = __('The :attribute must be an jpg,jpeg,png,svg');
-                
+
                 $request->validate([
                     'APP_URL'    => 'required|url',
                     'APP_NAME'   => 'required',
@@ -137,7 +137,7 @@ class SettingsController extends Controller
                     'SERVER_IP'  => 'required',
                     'logo_frontend'                 => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000',
                     'logo_favicon'                  => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000',
-                    'logo_light'                     => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000',   
+                    'logo_light'                     => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000',
                 ],
                 [
                     'logo_frontend.mimes' => $message_mimes,
@@ -165,22 +165,22 @@ class SettingsController extends Controller
 
                     $logo_frontend = $request->file('logo_frontend')->store('system', 'public');
                     $data_more['logo_frontend'] = "storage/". $logo_frontend;
-                    
+
                 }
                 if ($request->hasFile('logo_light') && $request->file('logo_light')->isValid()) {
 
                     // delete image old
                     $path = public_path('storage')."/". config('app.logo_light');
                     deleteImageWithPath($path);
-                    
+
                     $logo_light = $request->file('logo_light')->store('system', 'public');
                     $data_more['logo_light'] = "storage/". $logo_light;
-                
+
                 }
 
                 break;
         }
-        
+
         $data = array_merge($data_more,$request->except(['_token','logo_favicon','logo_frontend','logo_light']));
 
         if(is_array($data)){
@@ -204,7 +204,7 @@ class SettingsController extends Controller
         if ($image != '')
         {
             $request->validate([
-                'file' => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000', ], 
+                'file' => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000', ],
                 ['file.mimes' => __('The :attribute must be an jpg,jpeg,png,svg') , ]
             );
             $path_folder = public_path('storage/contents');
@@ -238,5 +238,5 @@ class SettingsController extends Controller
         die("translation:sync-missing-translation-keys done");
     }
 
-    
+
 }

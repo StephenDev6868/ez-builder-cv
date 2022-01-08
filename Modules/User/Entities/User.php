@@ -36,6 +36,8 @@ class User extends Authenticatable
         'settings',
         'package_id',
         'package_ends_at',
+        'credit',
+        'link_invite',
     ];
 
     /**
@@ -56,7 +58,7 @@ class User extends Authenticatable
     protected $casts = [
         'settings' => 'array'
     ];
-    
+
     public function scopeUser($query)
     {
         return $query->where('role', '=', 'user');
@@ -66,7 +68,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('Modules\ResumeCV\Entities\Resumecv');
     }
-    
+
     public function payments()
     {
         return $this->hasMany('Modules\Saas\Entities\Payment');
@@ -129,5 +131,5 @@ class User extends Authenticatable
             $user->resumecvs()->delete();
        });
     }
-    
+
 }

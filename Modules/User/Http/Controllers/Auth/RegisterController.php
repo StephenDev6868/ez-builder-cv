@@ -2,6 +2,7 @@
 
 namespace Modules\User\Http\Controllers\Auth;
 
+use Illuminate\Support\Str;
 use Modules\User\Http\Controllers\Controller;
 use Modules\User\Entities\User;
 use Modules\User\Notifications\UserRegistered;
@@ -49,7 +50,7 @@ class RegisterController extends Controller
         return $this->redirectTo;
 
     }
-    
+
     /**
      * Create a new controller instance.
      *
@@ -74,7 +75,7 @@ class RegisterController extends Controller
         ];
         $secret = config('recaptcha.api_secret_key');
         $site_key = config('recaptcha.api_site_key');
-        
+
         if ($secret && $site_key) {
             $rules['g-recaptcha-response'] = 'recaptcha';
         }
@@ -90,16 +91,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $data['role'] = 'user';
+        $max = User::query()->max('id');
         $user = User::create([
                'name'          => '',
                'email'         => $data['email'],
                'role'          => $data['role'],
                'password'      => Hash::make($data['password']),
+               'link_invite'   => env('APP_URL') . '/?refcode=' . ($max + 1) . str::random(9),
+               'credit'        => 100,
         ]);
         $user->notify((new UserRegistered())->onQueue('mail'));
 
-        return $user; 
-        
+        return $user;
+
     }
 
     /**
@@ -109,7 +113,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        
+
         return view('themes::' . config('app.SITE_LANDING') . '.auth.register');
     }
 }

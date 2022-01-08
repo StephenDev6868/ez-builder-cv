@@ -6,11 +6,18 @@
   <ul class="navbar-nav">
     {!! menuHeaderTopLeft() !!}
   </ul>
- 
+
 
   <ul class="navbar-nav ml-auto">
-    
+
     {!! menuHeaderTop() !!}
+
+    <li class="nav-item dropdown no-arrow">
+      <a class="nav-link">
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ optional(Auth::user())->credit ?? 0 }}</span>
+        <i class="fas fa-coins"></i>
+      </a>
+    </li>
 
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,21 +48,21 @@
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
         @can('admin')
         <a class="dropdown-item" href="{{ route('settings.index') }}">
-          <i class="fas fa-user-secret"></i> 
+          <i class="fas fa-user-secret"></i>
           @lang('Administrator')
         </a>
         @endcan
         <a class="dropdown-item" href="{{ route('accountsettings.index') }}">
-          <i class="fas fa-user"></i> 
+          <i class="fas fa-user"></i>
           @lang('Account Settings')
         </a>
         <a class="dropdown-item" href="{{ route('changepassword') }}">
-          <i class="fas fa-key"></i> 
+          <i class="fas fa-key"></i>
           @lang('Change password')
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ route('logout') }}">
-          <i class="fas fa-sign-out-alt"></i> 
+          <i class="fas fa-sign-out-alt"></i>
           @lang('Logout')
         </a>
       </div>

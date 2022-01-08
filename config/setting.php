@@ -96,7 +96,7 @@ return [
         'app.blockscss'          => 'blockscss',
 
         // saas
-        
+
         'saas.no_resume_cv' => 'no_resume_cv',
         'saas.remove_branding'  => 'remove_branding',
         'saas.download_pdf'=> 'download_pdf',
@@ -104,8 +104,8 @@ return [
 
         'app.ads_home_page_below_jobs_search' => 'ads_home_page_below_jobs_search',
         'app.ads_footer_layout_themes' => 'ads_footer_layout_themes',
-        'app.help_page' => help_page,
-        
+        'app.help_page' => 'help_page',
+
         'mail.host'                       => 'MAIL_HOST',
         'mail.port'                       => 'MAIL_PORT',
         'mail.from.address'               => 'MAIL_FROM_ADDRESS',
