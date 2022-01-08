@@ -18,17 +18,17 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('REFERRAL LINK')</label>
                                     <input type="text" name="name" value="{{ $linkInvite }}" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('SHARE VIA')</label>
-                                    <button type="submit" class="btn btn-secondary btn-block">
-                                        <i class="fe fe-save mr-2"></i> @lang('Twitter')
+                                    <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('Click to copy')</label>
+                                    <button type="button" class="btn btn-dark btn-block">
+                                        <i class="fe fe-save mr-2"></i> @lang('Copy')
                                     </button>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                     <div class="card-header">
                         <h1 class="h3 mt-2 mb-0 text-gray-800">@lang('Enter your coupon')</h1>
                         <p class="text-muted mt-3">
-                            @lang('Copy your personal referral link and share it with your friend and followers')
+                            @lang('Enter your coupon for get more credits')
                         </p>
                     </div>
                     <div class="card-body">
