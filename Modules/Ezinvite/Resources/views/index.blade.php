@@ -8,34 +8,32 @@
 
     <div class="row">
         <div class="col-md-12">
-            <form role="form" method="post" action="" autocomplete="off">
-                <div class="card">
-                    <div class="card-header">
-                        <h1 class="h3 mt-2 mb-0 text-gray-800">@lang('Share your link')</h1>
-                        <p class="text-muted mt-3">
-                            @lang('Copy your personal referral link and share it with your friend and followers')
-                        </p>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('REFERRAL LINK')</label>
-                                    <input type="text" name="name" value="{{ $linkInvite }}" class="form-control">
-                                </div>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h3 mt-2 mb-0 text-gray-800">@lang('Share your link')</h1>
+                    <p class="text-muted mt-3">
+                        @lang('Copy your personal referral link and share it with your friend and followers')
+                    </p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('REFERRAL LINK')</label>
+                                <input type="text" id="link_invite" name="name" value="{{ $linkInvite }}" class="form-control" disabled>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('Click to copy')</label>
-                                    <button type="button" class="btn btn-dark btn-block">
-                                        <i class="fe fe-save mr-2"></i> @lang('Copy')
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label font-weight-bold" style="font-size: 12.5px;">@lang('Click to copy')</label>
+                                <button type="button" class="btn btn-dark btn-block" id="copy_link">
+                                    <i class="fe fe-save mr-2"></i> @lang('Copy')
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -73,3 +71,5 @@
         </div>
     </div>
 @stop
+<script type="text/javascript" src="{{ Module::asset('ezinvite:js/jquery.js') }}"></script>
+<script type="text/javascript" src="{{ Module::asset('ezinvite:js/invite-coupon.js') }}"></script>

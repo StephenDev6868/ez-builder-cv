@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Str;
 use Modules\User\Entities\User;
-use Ramsey\Uuid\Uuid;
 
 class UpdateLinkInviteIntoUserTable extends Migration
 {
@@ -20,7 +19,7 @@ class UpdateLinkInviteIntoUserTable extends Migration
 
         foreach ($users as $user) {
             $user->update([
-                'link_invite' => env('APP_URL') . '/?refcode=' . $user->getKey() . str::random(9),
+                'link_invite' => env('APP_URL') . 'invite/?refcode=' . $user->getKey() . str::random(9),
             ]);
         }
     }

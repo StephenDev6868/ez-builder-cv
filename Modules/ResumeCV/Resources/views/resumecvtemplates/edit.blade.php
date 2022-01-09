@@ -29,8 +29,9 @@
                                 <label class="form-label">@lang('Name')</label>
                                 <input type="text" name="name" value="{{$template->name}}" class="form-control" placeholder="@lang('Name')">
                             </div>
-                            
+
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">@lang('Categories')</label>
@@ -46,11 +47,19 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">@lang('Credit')</label>
+                                <input type="text" name="credit" value="{{$template->credit ?? 0}}" class="form-control" placeholder="@lang('Name')">
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12">
-                            
+
                             <div class="form-group">
                                 <label class="form-label">@lang('Thumb') (750x750)</label>
                                  <input name="thumb" type="file"><br>
@@ -67,7 +76,7 @@
                             </div>
 
                         </div>
-                        
+
                     </div>
                      <div class="row">
                         <div class="col-md-6">
@@ -76,10 +85,10 @@
                                 <label class="custom-switch">
                                     @if ($template->active)
                                         <input type="checkbox" name="active" value="1" class="custom-switch-input" checked>
-                                    @else 
+                                    @else
                                         <input type="checkbox" name="active" value="1" class="custom-switch-input" >
                                     @endif
-                                    
+
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description">@lang('Active template')</span>
                                 </label>
@@ -91,7 +100,7 @@
                                 <label class="custom-switch">
                                     @if ($template->is_premium)
                                         <input type="checkbox" name="is_premium"  value="1" class="custom-switch-input" checked>
-                                    @else 
+                                    @else
                                         <input type="checkbox" name="is_premium" class="custom-switch-input" >
                                     @endif
                                 <span class="custom-switch-indicator"></span>
@@ -115,6 +124,6 @@
         </form>
 
     </div>
-    
+
 </div>
 @stop

@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Modules\Ezinvite\Entities\Coupon;
+use Modules\Ezinvite\Entities\HistoryCoupon;
 use Modules\Ezinvite\Entities\HistoryCredit;
 use Modules\User\Entities\User;
 
@@ -64,12 +65,21 @@ class EzinviteController extends Controller
             return redirect()->route('invite-coupon')
                 ->with(['error' => __('This coupon end of use')]);
         }
-
+        
+        $isCouponUse = HistoryCoupon::query()
+                        ->where('user_id', Auth::user()->id)
+                        ->where('coupon_id', $coupon->getKey())
+                        ->first();
+        if ($isCouponUse) {
+            return redirect()->route('invite-coupon')
+                ->with(['error' => __('You have already use this coupon')]);
+        }
+        
         // Get info user need update add credit
         $user = User::query()
             ->where('id', Auth::user()->id)
             ->first();
-        (int) $user->credit += (int) $coupon->credit;
+        $user->credit = (int) $user->credit +  (int) $coupon->credit;
         $user->save();
 
         // Increment useage coupon
@@ -83,6 +93,12 @@ class EzinviteController extends Controller
                 'amount'  =>  $coupon->credit,
                 'type'    =>  2,
                 'done_at' =>  now(),
+            ]);
+        
+        HistoryCoupon::query()
+            ->create([
+                'user_id'   => $user->getKey(),
+                'coupon_id' => $coupon->getKey(),
             ]);
 
         return redirect()->route('invite-coupon')

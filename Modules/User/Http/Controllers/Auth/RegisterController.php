@@ -61,7 +61,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
+    /**alltemplates
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data

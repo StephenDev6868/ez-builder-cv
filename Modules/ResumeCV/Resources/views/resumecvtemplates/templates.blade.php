@@ -34,8 +34,13 @@
                   @endif
               </a>
               <div class="content_blog clearfixflex flex-column flex-lg-row">
-                  <div class="p-1">
-                    {{ $item->name }}
+                  <div class="d-flex justify-content-between info-template">
+                      <div class="p-1">
+                          {{ $item->name }}
+                      </div>
+                      <div class="p-1 text-warning" style="font-weight: bold;">
+                          {{ $item->credit ?? 0 }} credits
+                      </div>
                   </div>
                   <div class="d-flex pt-1">
                       <a href="#" class="btn btn-primary mr-2 btn_builder_template" data-id="{{$item->id}}" data-toggle="modal" data-target="#createModal">@lang("Builder")</a>

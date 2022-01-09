@@ -21,6 +21,7 @@
                                 <th>@lang('Image')</th>
                                 <th>@lang('Name')</th>
                                 <th>@lang('Category')</th>
+                                <th>@lang('Credit')</th>
                                 <th>@lang('Status')</th>
                                 <th>@lang('Action')</th>
                             </tr>
@@ -29,7 +30,6 @@
                             @foreach($data as $item)
                             <tr>
                                 <td><img src="{{ URL::to('/') }}/storage/thumb_templates/{{ $item->thumb }}" class="img-thumbnail" height="40" />
-                                    
                                 </td>
                                 <td>
                                     <span><a href="{{ route('settings.resumecvtemplate.edit', $item) }}">{{ $item->name }}</a></span>
@@ -39,7 +39,10 @@
                                     @else
                                         <span>@lang('None')</span>
                                     @endif
-                                   
+
+                                </td>
+                                <td class="text-warning" style="font-weight: bolder;">
+                                    {{ $item->credit ?? 0 }}
                                 </td>
                                 <td>
                                     @if($item->active)
@@ -53,7 +56,7 @@
                                     @else
                                         <span class="small text-success"><strong>@lang('Free')</strong></span>
                                     @endif
-                                    
+
                                 </td>
                                 <td>
                                      <div class="d-flex">
@@ -65,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <div class="p-1"> 
+                                        <div class="p-1">
                                             <form method="post" action="{{ route('settings.resumecvtemplate.clone', $item) }}" >
                                               @csrf
                                               <button type="submit" class="badge badge-default border-0">
@@ -102,7 +105,7 @@
         @endif
 
     </div>
-    
+
 </div>
 
 @stop
