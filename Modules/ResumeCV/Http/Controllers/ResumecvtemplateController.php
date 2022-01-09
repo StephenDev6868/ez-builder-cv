@@ -35,7 +35,7 @@ class ResumecvtemplateController extends Controller
      public function getAllTemplateThemes($id = "",Request $request)
     {
         $data = Resumecvtemplate::with('category')->active();
-        
+
         if ($id)
             $data = Resumecvtemplate::where('category_id', $id);
 
@@ -77,7 +77,7 @@ class ResumecvtemplateController extends Controller
         if ($item) {
 
             return response()->json([
-                'content'=>$item->content, 
+                'content'=>$item->content,
                 'style' => $item->style
             ]);
         }
@@ -88,7 +88,7 @@ class ResumecvtemplateController extends Controller
     public function builder($id, Request $request)
     {
         $data = Resumecvtemplate::findorFail($id);
-        
+
         $data = replaceVarContentStyle($data);
 
         $all_templates = Resumecvtemplate::with('category');
@@ -97,7 +97,7 @@ class ResumecvtemplateController extends Controller
         $images_url = getAllImagesContentMedia();
         $all_icons = config('app.all_icons');
         $all_fonts = config('app.all_fonts');
-        
+
         return view('resumecv::resumecvtemplates.builder_template', compact('data','all_icons','all_fonts','images_url','all_templates'));
 
     }
@@ -113,20 +113,20 @@ class ResumecvtemplateController extends Controller
             if($item->save()){
               return response()->json(['success'=>__("Updated successfully")]);
             }
-            
+
         }
         return response()->json(['error'=>__("Updated failed")]);
     }
-   
+
     public function loadBuilder($id, Request $request)
     {
         $item = Resumecvtemplate::find($id);
         $item = replaceVarContentStyle($item);
-        
+
         if ($item) {
 
             return response()->json([
-                    'gjs-html'=>$item->content, 
+                    'gjs-html'=>$item->content,
                     'gjs-css' => $item->style
             ]);
         }
@@ -308,6 +308,7 @@ class ResumecvtemplateController extends Controller
             'content' => $request->content,
             'style' => $request->style,
             'is_premium' => $request->is_premium,
+            'credit' => $request->credit,
             'active' => $request->active,
             'thumb' => $image_name
         );
@@ -354,11 +355,11 @@ class ResumecvtemplateController extends Controller
         $validator = Validator::make($request->all(), [
                 'files' => 'required|mimes:jpg,jpeg,png,svg|max:20000',
         ]);
-        if ($validator->fails()) {    
+        if ($validator->fails()) {
             return response()->json(['error' => __('The file must be an jpg,jpeg,png,svg')]);
         }
         $images=array();
-        $imagesURL=array(); 
+        $imagesURL=array();
 
         if($request->hasfile('files'))
         {

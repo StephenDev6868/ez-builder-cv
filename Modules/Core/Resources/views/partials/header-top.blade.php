@@ -13,8 +13,8 @@
     {!! menuHeaderTop() !!}
 
     <li class="nav-item dropdown no-arrow">
-      <a class="nav-link">
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ optional(Auth::user())->credit ?? 0 }}</span>
+      <a class="nav-link text-warning">
+        <span class="mr-2 d-none d-lg-inline small" style="font-weight: bolder;">{{ optional(Auth::user())->credit ?? 0 }}</span>
         <i class="fas fa-coins"></i>
       </a>
     </li>

@@ -4,6 +4,7 @@ namespace Modules\Ezinvite\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Ezinvite\Entities\HistoryCoupon;
 
 class Coupon extends Model
 {

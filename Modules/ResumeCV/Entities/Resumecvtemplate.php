@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resumecvtemplate extends Model
 {
     protected $table = 'resumecvtemplates';
-    
+
     protected $dates = [
         'created_at',
         'updated_at',
@@ -21,10 +21,11 @@ class Resumecvtemplate extends Model
         'style',
         'active',
         'is_premium',
+        'credit',
         'created_at',
         'updated_at',
     ];
-   
+
     protected $casts = [
         'is_premium' => 'boolean',
         'active' => 'boolean',
