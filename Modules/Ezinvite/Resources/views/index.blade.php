@@ -70,6 +70,14 @@
             </form>
         </div>
     </div>
+
+@push('scripts')
+    <script>
+        var langs = {
+            "Copied": "@lang('Copied')",
+        };
+    </script>
+    <script type="text/javascript" src="{{ Module::asset('ezinvite:js/invite-coupon.js') }}"></script>
+@endpush
+    
 @stop
-<script type="text/javascript" src="{{ Module::asset('ezinvite:js/jquery.js') }}"></script>
-<script type="text/javascript" src="{{ Module::asset('ezinvite:js/invite-coupon.js') }}"></script>

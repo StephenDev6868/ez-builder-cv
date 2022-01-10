@@ -1,5 +1,7 @@
-$(document).ready(function() {
-    $('#copy_link').click(function($event) {
+(function($) {
+    "use strict"; // Start of use strict
+    
+    $("#copy_link").on("click", function(e) {
         const itemInput = document.createElement('input');
         itemInput.type = 'text';
         const content = document.getElementById('link_invite').value;
@@ -8,8 +10,15 @@ $(document).ready(function() {
         itemInput.select();
         const result = document.execCommand('copy');
         if (result) {
-            alert('copied!')
+            const html = `<i class="fa fa-check-circle text-success"></i><small> ${langs.Copied}</smal>`;
+            Swal.fire({
+                position: 'top-end',
+                timer: 3000,
+                toast: true,
+                html: html,
+                showConfirmButton: false,
+            });
         }
         document.body.removeChild(itemInput);
     });
-})
+})(jQuery); // End of use strict
