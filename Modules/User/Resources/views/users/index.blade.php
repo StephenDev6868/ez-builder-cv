@@ -28,10 +28,10 @@
                             <th>@lang('Name')</th>
                             <th>@lang('E-mail')</th>
                             <th>@lang('Role')</th>
+                            <th>@lang('Invited')</th>
                             <th>@lang('Gender')</th>
                             <th>@lang('High school name')</th>
                             <th>@lang('Grade')</th>
-                            <th>@lang('Users Invited')</th>
                             <th>@lang('Action')</th>
                         </tr>
                     </thead>
@@ -47,10 +47,11 @@
                             <td>
                                 {{ $item->role }}
                             </td>
+                            <td>{{ $item->userHistoryInvite()->count() }}</td>
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->high_school_name }}</td>
                             <td>{{ $item->grade }}</td>
-                            <td>{{ $item->userHistoryInvite()->count() }}</td>
+                            
                             <td>
                                      <div class="d-flex">
                                         <div class="p-1 ">

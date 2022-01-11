@@ -27,19 +27,12 @@
           <div class="clearfix blog-bottom blog blogitemlarge">
               <a href="#" data-id="{{$item->id}}" data-toggle="modal" data-target="#createModal" title="{{$item->name}}" class="btn_builder_template image-blog date clearfix">
                   <img src="{{ URL::to('/') }}/storage/thumb_templates/{{ $item->thumb }}" alt="{{$item->name}}" data-was-processed="true" class="" />
-                  @if($item->is_premium)
-                        <span class="post-date badge badge-danger"><i class="fas fa-star"></i> @lang("Premium")</span>
-                  @else
-                        <span class="post-date badge badge-success"><i class="fas fa-star"></i> @lang("Free")</span>
-                  @endif
+                  <span class="post-date badge badge-success"><i class="fas fa-coins"></i> {{ $item->credit ?? 0 }}</span>
               </a>
               <div class="content_blog clearfixflex flex-column flex-lg-row">
                   <div class="d-flex justify-content-between info-template">
                       <div class="p-1">
                           {{ $item->name }}
-                      </div>
-                      <div class="p-1 text-warning" style="font-weight: bold;">
-                          {{ $item->credit ?? 0 }} credits
                       </div>
                   </div>
                   <div class="d-flex pt-1">
