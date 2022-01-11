@@ -40,7 +40,7 @@ class UserController extends Controller
     public function create()
     {
         $packages = [];
-        
+
         if (Module::find('Saas')) {
             $packages = Package::all();
         }
@@ -64,13 +64,14 @@ class UserController extends Controller
             'email'           => 'required|email|max:255|unique:users',
             'password'        => 'required|string|min:6|same:password_confirmation',
             'package_ends_at' => 'nullable|date',
+            'credit'          => 'required|numeric|min:0',
         ]);
 
         $request->request->add([
             'password' => Hash::make($request->password),
         ]);
 
-        
+
         $user = User::create($request->all());
 
         return redirect()->route('settings.users.index')
@@ -112,7 +113,10 @@ class UserController extends Controller
             'email'           => 'required|email|unique:users,email,' . $user->id,
             'password'        => 'nullable|string|min:6|same:password_confirmation',
             'package_ends_at' => 'nullable|date',
+            'credit'          => 'required|numeric|min:0',
 
+        ],[
+            'credit.min' => 'Credit must be more than zero'
         ]);
 
         if ($request->filled('password')) {
@@ -123,7 +127,7 @@ class UserController extends Controller
             $request->request->remove('password');
         }
 
-        
+
         $user->update($request->all());
 
         return redirect()->route('settings.users.edit', $user)
@@ -182,7 +186,7 @@ class UserController extends Controller
         $request->request->add([
             'password' => Hash::make($request->password),
         ]);
-        
+
         $request->user()->update($request->all());
 
         return redirect()->route('changepassword')
@@ -209,12 +213,12 @@ class UserController extends Controller
     public function exportcsv(Request $request)
     {
         $data = User::all();
-       
+
         if (count($data) > 0) {
             $filename = 'userdata-'.strtotime("now").'.csv';
-            
+
             $handle = fopen($filename, 'w+');
-            
+
             $columns = ['Name', 'Email', 'Mobile-Phone' , 'Role', 'Gender', 'High_school_name', 'Grade', 'Created_at'];
 
             fputcsv($handle, $columns);
@@ -231,7 +235,7 @@ class UserController extends Controller
                 $row['created_at']  = $item->created_at->format('d-m-Y') ? $item->created_at->format('d-m-Y') : '';
                 fputcsv($handle, $row);
             }
-            
+
             fclose($handle);
 
             $headers = array(
@@ -242,6 +246,6 @@ class UserController extends Controller
 
         }
         return redirect()->back()->with('error', __('Not found any data for export'));
-           
+
     }
 }

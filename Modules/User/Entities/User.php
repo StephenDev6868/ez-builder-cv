@@ -38,7 +38,7 @@ class User extends Authenticatable
         'package_id',
         'package_ends_at',
         'credit',
-        'link_invite',
+        'refcode',
     ];
 
     /**

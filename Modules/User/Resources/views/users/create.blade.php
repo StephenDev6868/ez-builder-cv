@@ -85,6 +85,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">@lang('Credit')</label>
+                                <input type="text" name="credit" class="form-control" value="{{ config('app.default_credit' )}}" placeholder="@lang('Credit')">
+                            </div>
+                        </div>
                     </div>
                     <div class="row d-none" id="row_package_user">
                         <div class="col-md-6">
@@ -121,7 +127,7 @@
         </form>
 
     </div>
-    
+
 </div>
 
 @push('scripts')

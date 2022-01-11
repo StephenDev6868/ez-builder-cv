@@ -29,6 +29,7 @@
                             <th>@lang('E-mail')</th>
                             <th>@lang('Role')</th>
                             <th>@lang('Invited')</th>
+                            <th>@lang('Credits')</th>
                             <th>@lang('Gender')</th>
                             <th>@lang('High school name')</th>
                             <th>@lang('Grade')</th>
@@ -48,10 +49,11 @@
                                 {{ $item->role }}
                             </td>
                             <td>{{ $item->userHistoryInvite()->count() }}</td>
+                            <td> {{ $item->credit ?? 0 }} </td>
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->high_school_name }}</td>
                             <td>{{ $item->grade }}</td>
-                            
+
                             <td>
                                      <div class="d-flex">
                                         <div class="p-1 ">

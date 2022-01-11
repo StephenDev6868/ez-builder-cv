@@ -23,7 +23,7 @@ class EzinviteController extends Controller
      */
     public function index()
     {
-        $linkInvite = optional(Auth::user())->link_invite;
+        $linkInvite =  config('app.url') . '/invite/?refcode=' . optional(Auth::user())->refcode;
         return view('ezinvite::index', compact('linkInvite'));
     }
 

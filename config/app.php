@@ -69,18 +69,18 @@ return [
     'logo_favicon'  => 'img/favicon.png',
 
     'logo_frontend' => 'img/logo.png',
-    
+
     'logo_light' => 'img/logo_light.png',
-    
+
     'SITE_SLOGAN' => 'ResumeCV Builder APP',
     'SITE_DESCRIPTION'                => 'ResumeCV Builder APP',
-    
+
     'SITE_KEYWORDS'                   => 'ResumeCV Builder APP',
-    
+
     'SITE_LANDING'                       => 'default',
-    
+
     'DISABLE_LANDING'                 => false,
-    
+
     'GOOGLE_ANALYTICS'                => '',
 
     'ads_home_page_below_jobs_search' => '',
@@ -1778,6 +1778,10 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+
+    'default_credit' => env('DEFAULT_CREDIT'),
+
+    'credit_refer' => env('CREDIT_REFER'),
 
     /*
     |--------------------------------------------------------------------------

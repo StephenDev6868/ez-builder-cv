@@ -102,7 +102,7 @@ class RegisterController extends Controller
             'email'         => $data['email'],
             'role'          => $data['role'],
             'password'      => Hash::make($data['password']),
-            'link_invite'   => config('app.url') . '/?refcode=' . ($max + 1) . str::random(9),
+            'refcode'       => ($max + 1) . str::random(9),
             'credit'        => 100,
         ]);
         $user->notify((new UserRegistered())->onQueue('mail'));
@@ -112,21 +112,21 @@ class RegisterController extends Controller
             $refCode = str_replace('refcode=', '', $parsedUrl['query']);
             if (Cookie::has($refCode)) {
                 $userR = User::query()
-                    ->where('link_invite', 'like', '%' . $refCode . '%')
+                    ->where('refcode', $refCode)
                     ->first();
                 if (! $userR) {
                     redirect()->route('register')
                         ->with(['error' => 'User referral not found']);
                 }
 
-                $userR->credit = (int) $userR->credit + 100;
+                $userR->credit = (int) $userR->credit + config('app.credit_refer');
                 $userR->save();
 
                 // Update history credit of user referral
                 HistoryCredit::query()
                     ->create([
                         'user_id' => $userR->getKey(),
-                        'amount'  => 100,
+                        'amount'  => config('app.credit_refer'),
                         'type'    => 1,
                         'status'  => 1,
                         'done_at' => now(),
@@ -136,7 +136,7 @@ class RegisterController extends Controller
                 HistoryCredit::query()
                     ->create([
                         'user_id' => $user->getKey(),
-                        'amount'  => 100,
+                        'amount'  => config('app.default_credit'),
                         'type'    => 4,
                         'status'  => 1,
                         'done_at' => now(),
