@@ -109,8 +109,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">@lang('Number Users Invited')</label>
+                                <input type="text" name="user_invited" value="{{ $user->userHistoryInvite()->count() }}" class="form-control" disabled>
+                            </div>
+                        </div>
                     </div>
-                    
+
 
                 </div>
                 <div class="card-footer">

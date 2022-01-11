@@ -31,6 +31,7 @@
                             <th>@lang('Gender')</th>
                             <th>@lang('High school name')</th>
                             <th>@lang('Grade')</th>
+                            <th>@lang('Users Invited')</th>
                             <th>@lang('Action')</th>
                         </tr>
                     </thead>
@@ -49,12 +50,13 @@
                             <td>{{ $item->gender }}</td>
                             <td>{{ $item->high_school_name }}</td>
                             <td>{{ $item->grade }}</td>
+                            <td>{{ $item->userHistoryInvite()->count() }}</td>
                             <td>
                                      <div class="d-flex">
                                         <div class="p-1 ">
                                              <a href="{{ route('settings.users.edit', $item) }}" class="btn btn-sm btn-primary">@lang('Edit')</a>
                                         </div>
-                                        
+
                                         <div class="p-1 ">
                                               <form method="post" action="{{ route('settings.users.destroy', $item) }}" onsubmit="return confirm('@lang('Confirm delete?')');">
                                                 @csrf
@@ -65,10 +67,10 @@
                                             </form>
                                         </div>
                                     </div>
-                                   
-                                    
+
+
                                 </td>
-                            
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -83,6 +85,6 @@
         </div>
         @endif
     </div>
-    
+
 </div>
 @stop

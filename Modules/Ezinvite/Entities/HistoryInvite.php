@@ -4,13 +4,10 @@ namespace Modules\Ezinvite\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class HistoryCredit extends Model
+class HistoryInvite extends Model
 {
     protected $fillable = [
         'user_id',
-        'amount',
-        'type',
-        'status',
-        'done_at',
+        'new_user_id',
     ];
 }

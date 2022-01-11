@@ -7,7 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Modules\Ezinvite\Entities\Coupon;
 use Modules\Ezinvite\Entities\HistoryCoupon;
 use Modules\Ezinvite\Entities\HistoryCredit;
@@ -65,7 +67,7 @@ class EzinviteController extends Controller
             return redirect()->route('invite-coupon')
                 ->with(['error' => __('This coupon end of use')]);
         }
-        
+
         $isCouponUse = HistoryCoupon::query()
                         ->where('user_id', Auth::user()->id)
                         ->where('coupon_id', $coupon->getKey())
@@ -74,7 +76,7 @@ class EzinviteController extends Controller
             return redirect()->route('invite-coupon')
                 ->with(['error' => __('You have already use this coupon')]);
         }
-        
+
         // Get info user need update add credit
         $user = User::query()
             ->where('id', Auth::user()->id)
@@ -94,7 +96,7 @@ class EzinviteController extends Controller
                 'type'    =>  2,
                 'done_at' =>  now(),
             ]);
-        
+
         HistoryCoupon::query()
             ->create([
                 'user_id'   => $user->getKey(),
@@ -102,6 +104,34 @@ class EzinviteController extends Controller
             ]);
 
         return redirect()->route('invite-coupon')
-            ->with(['success' => "You have been add {$coupon->credit} credit successfully"]);
+            ->with(['success' => "You have been add {$coupon->credit} credits successfully"]);
+    }
+
+    /**
+     *
+    */
+    public function historyCredit()
+    {
+        $user = Auth::user();
+
+        $data = HistoryCredit::query()
+            ->where('user_id', $user->id)
+            ->select('*')
+            ->paginate(10);
+
+        return view('ezinvite::history-credit', compact('data'));
+    }
+
+    /**
+     *
+     * @param Request $request Request
+     *
+     * @return mixed
+    */
+    public function invite(Request $request)
+    {
+        Cookie::queue($request->refcode, str::uuid(), 60);
+
+        return redirect()->route('register', "refcode={$request->refcode}");
     }
 }

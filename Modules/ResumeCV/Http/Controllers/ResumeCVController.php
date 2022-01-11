@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\ResumeCV\Entities\Resumecv;
 use Modules\ResumeCV\Entities\Resumecvtemplate;
 use Modules\User\Entities\User;
+use Modules\Ezinvite\Entities\HistoryCredit;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use URL;
@@ -79,6 +80,24 @@ class ResumeCVController extends Controller
         };
 
         $template = replaceVarContentStyle($template);
+
+        //
+        HistoryCredit::query()
+            ->create([
+                'user_id' => $user->id,
+                'amount'  => $template->credit,
+                'type'    => 3,
+                'status'  => 2,
+                'done_at' => now(),
+            ]);
+
+        // Update credit of user after build
+        $userN = User::query()
+            ->where('id', $user->id)
+            ->first();
+        $userN->credit = (int) $userN->credit - (int) $template->credit;
+        $userN->save();
+
 
         $item = Resumecv::create([
             'user_id'  => $request->user()->id,

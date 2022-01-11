@@ -11,7 +11,13 @@
 |
 */
 
+Route::get('/invite', 'EzinviteController@invite')->name('invite');
+
 Route::middleware('auth')->group(function () {
+    Route::prefix('credits')->group(function() {
+        Route::get('/', 'EzinviteController@historyCredit')->name('history');
+    });
+
     Route::prefix('invite-coupon')->group(function() {
         Route::get('/', 'EzinviteController@index')->name('invite-coupon');
         Route::post('/add-credit', 'EzinviteController@getCredit')->name('getCredit');

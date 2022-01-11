@@ -33,6 +33,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">@lang('Credit')</label>
+                                <input type="text" name="credit" value="{{ old('credit') }}" class="form-control" placeholder="@lang('Credit')">
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -88,7 +94,7 @@
 
 
     </div>
-    
+
 </div>
 
 

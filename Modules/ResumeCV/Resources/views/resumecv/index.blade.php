@@ -22,7 +22,7 @@
                                 <th>@lang('Action')</th>
                             </tr>
                         </thead>
-                        <tbody>            
+                        <tbody>
                             @foreach($data as $item)
                             <tr>
                                 <td>
@@ -50,7 +50,7 @@
                                          <div class="p-1 ">
                                               <a href="{{ URL::to('resumecv/download',$item->code) }}"><span  class="badge badge-success">@lang('Download PDF')</span></a>
                                         </div>
-                                        <div class="p-1"> 
+                                        <div class="p-1">
                                             <form method="post" action="{{ route('resumecv.clone', $item) }}" >
                                               @csrf
                                               <button type="submit" class="badge badge-default border-0">
@@ -85,7 +85,7 @@
             {{ $data->appends( Request::all() )->links() }}
         </div>
     </div>
-    
+
 </div>
 
 <div class="row">

@@ -4,6 +4,7 @@ namespace Modules\User\Entities;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Ezinvite\Entities\HistoryInvite;
 use Modules\User\Notifications\QueuedResetPassword;
 
 class User extends Authenticatable
@@ -130,6 +131,15 @@ class User extends Authenticatable
         static::deleting(function($user) {
             $user->resumecvs()->delete();
        });
+    }
+
+    /**
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function userHistoryInvite()
+    {
+        return $this->hasMany(HistoryInvite::class, 'user_id', 'id');
     }
 
 }

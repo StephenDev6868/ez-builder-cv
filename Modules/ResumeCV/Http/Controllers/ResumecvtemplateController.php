@@ -165,7 +165,13 @@ class ResumecvtemplateController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['category_id' => 'required|integer', 'name' => 'required', 'thumb' => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000', ], ['thumb.mimes' => __('The :attribute must be an jpg,jpeg,png,svg') , ]);
+        $request->validate([
+            'category_id' => 'required|integer',
+            'name' => 'required',
+            'thumb' => 'sometimes|required|mimes:jpg,jpeg,png,svg|max:20000',
+            ],
+            ['thumb.mimes' => __('The :attribute must be an jpg,jpeg,png,svg') ,
+            ]);
 
         if (!$request->filled('is_premium'))
         {
@@ -208,6 +214,7 @@ class ResumecvtemplateController extends Controller
             'content' => $request->content,
             'style' => $request->style,
             'is_premium' => $request->is_premium,
+            'credit' => $request->credit,
             'active' => $request->active,
             'thumb' => $new_name
         );

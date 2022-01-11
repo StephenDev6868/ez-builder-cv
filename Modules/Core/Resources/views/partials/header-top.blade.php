@@ -56,6 +56,10 @@
           <i class="fas fa-user"></i>
           @lang('Account Settings')
         </a>
+        <a class="dropdown-item" href="{{ url('credits') }}">
+          <i class="fas fa-donate"></i>
+          @lang('History credit')
+        </a>
         <a class="dropdown-item" href="{{ route('changepassword') }}">
           <i class="fas fa-key"></i>
           @lang('Change password')

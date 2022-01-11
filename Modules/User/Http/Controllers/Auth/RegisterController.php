@@ -2,12 +2,16 @@
 
 namespace Modules\User\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Modules\Ezinvite\Entities\HistoryCredit;
+use Modules\Ezinvite\Entities\HistoryInvite;
 use Modules\User\Http\Controllers\Controller;
 use Modules\User\Entities\User;
 use Modules\User\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -85,7 +89,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array   $data    Data
+     * @param Request $request Request
      * @return \App\User
      */
     protected function create(array $data)
@@ -93,14 +98,57 @@ class RegisterController extends Controller
         $data['role'] = 'user';
         $max = User::query()->max('id');
         $user = User::create([
-               'name'          => '',
-               'email'         => $data['email'],
-               'role'          => $data['role'],
-               'password'      => Hash::make($data['password']),
-               'link_invite'   => env('APP_URL') . '/?refcode=' . ($max + 1) . str::random(9),
-               'credit'        => 100,
+            'name'          => '',
+            'email'         => $data['email'],
+            'role'          => $data['role'],
+            'password'      => Hash::make($data['password']),
+            'link_invite'   => env('APP_URL') . '/?refcode=' . ($max + 1) . str::random(9),
+            'credit'        => 100,
         ]);
         $user->notify((new UserRegistered())->onQueue('mail'));
+
+        $parsedUrl = parse_url(URL::previous());
+        if (isset($parsedUrl['query']) && strs_contain($parsedUrl['query'], 'refcode=')) {
+            $refCode = str_replace('refcode=', '', $parsedUrl['query']);
+            if (Cookie::has($refCode)) {
+                $userR = User::query()
+                    ->where('link_invite', 'like', '%' . $refCode . '%')
+                    ->first();
+                if (! $userR) {
+                    redirect()->route('register')
+                        ->with(['error' => 'User referral not found']);
+                }
+
+                $userR->credit = (int) $userR->credit + 100;
+                $userR->save();
+
+                // Update history credit of user referral
+                HistoryCredit::query()
+                    ->create([
+                        'user_id' => $userR->getKey(),
+                        'amount'  => 100,
+                        'type'    => 1,
+                        'status'  => 1,
+                        'done_at' => now(),
+                    ]);
+
+                // Update history credit of new user
+                HistoryCredit::query()
+                    ->create([
+                        'user_id' => $user->getKey(),
+                        'amount'  => 100,
+                        'type'    => 4,
+                        'status'  => 1,
+                        'done_at' => now(),
+                    ]);
+
+                HistoryInvite::query()
+                    ->create([
+                       'user_id'     => $userR->getKey(),
+                       'new_user_id' => $user->getKey(),
+                    ]);
+            };
+        }
 
         return $user;
 
