@@ -80,16 +80,17 @@ class ResumeCVController extends Controller
         };
 
         $template = replaceVarContentStyle($template);
-
         //
-        HistoryCredit::query()
-            ->create([
-                'user_id' => $user->id,
-                'amount'  => $template->credit,
-                'type'    => 3,
-                'status'  => 2,
-                'done_at' => now(),
-            ]);
+        if($template->credit > 0){
+            HistoryCredit::query()
+                ->create([
+                    'user_id' => $user->id,
+                    'amount'  => $template->credit,
+                    'type'    => 3,
+                    'status'  => 2,
+                    'done_at' => now(),
+                ]);
+        }
 
         // Update credit of user after build
         $userN = User::query()

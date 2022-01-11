@@ -19,7 +19,7 @@ class UpdateNewLinkInviteIntoUsersTable extends Migration
 
         foreach ($users as $user) {
             $user->update([
-                'link_invite' => env('APP_URL') . '/invite/?refcode=' . $user->getKey() . str::random(9),
+                'link_invite' => config('app.url') . '/invite/?refcode=' . $user->getKey() . str::random(9),
             ]);
         }
     }

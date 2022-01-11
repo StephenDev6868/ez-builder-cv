@@ -9,36 +9,27 @@
     <div class="row">
         @if($data->count() > 0)
             <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table card-table table-vcenter text-nowrap">
                             <thead class="thead-dark">
                             <tr>
-                                <th>@lang('ID')</th>
-                                <th>@lang('Status')</th>
                                 <th>@lang('Amount')</th>
                                 <th>@lang('Type')</th>
-                                <th>@lang('Done At')</th>
+                                <th>@lang('Date Created')</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach($data as $item)
                                     <tr>
-                                        <td>
-                                            {{ $item->id }}
-                                        </td>
-                                        <td>
-                                            @if($item->status == 1)
-                                                <i class="fas fa-plus-circle text-success"></i>
-                                            @else
-                                                <i class="fas fa-minus-circle text-danger"></i>
-                                            @endif
-                                        </td>
                                         <td style="font-weight: bolder;">
-                                            <span class="text-warning">
+                                            @if($item->status == 1)
+                                                +
+                                            @else
+                                                -
+                                            @endif
+                                            <span class="">
                                                 {{ $item->amount }}
-                                            </span> credits
+                                            </span>
                                         </td>
                                         <td>
                                             @if($item->type == 1)
@@ -59,8 +50,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
         </div>
         @endif
         <div class="mt-4">

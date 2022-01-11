@@ -93,6 +93,7 @@ class EzinviteController extends Controller
             ->create([
                 'user_id' =>  $user->getKey(),
                 'amount'  =>  $coupon->credit,
+                'status' => 1,
                 'type'    =>  2,
                 'done_at' =>  now(),
             ]);

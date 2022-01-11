@@ -102,7 +102,7 @@ class RegisterController extends Controller
             'email'         => $data['email'],
             'role'          => $data['role'],
             'password'      => Hash::make($data['password']),
-            'link_invite'   => env('APP_URL') . '/?refcode=' . ($max + 1) . str::random(9),
+            'link_invite'   => config('app.url') . '/?refcode=' . ($max + 1) . str::random(9),
             'credit'        => 100,
         ]);
         $user->notify((new UserRegistered())->onQueue('mail'));
