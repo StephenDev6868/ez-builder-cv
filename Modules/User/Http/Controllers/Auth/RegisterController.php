@@ -132,16 +132,6 @@ class RegisterController extends Controller
                         'done_at' => now(),
                     ]);
 
-                // Update history credit of new user
-                HistoryCredit::query()
-                    ->create([
-                        'user_id' => $user->getKey(),
-                        'amount'  => config('app.default_credit'),
-                        'type'    => 4,
-                        'status'  => 1,
-                        'done_at' => now(),
-                    ]);
-
                 HistoryInvite::query()
                     ->create([
                        'user_id'     => $userR->getKey(),
@@ -149,6 +139,16 @@ class RegisterController extends Controller
                     ]);
             };
         }
+
+        // Update history credit of new user
+        HistoryCredit::query()
+            ->create([
+                'user_id' => $user->getKey(),
+                'amount'  => config('app.default_credit'),
+                'type'    => 4,
+                'status'  => 1,
+                'done_at' => now(),
+            ]);
 
         return $user;
 
