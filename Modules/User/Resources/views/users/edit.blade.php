@@ -89,28 +89,6 @@
                     <div class="row" id="row_package_user">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="form-label">@lang('Package')</label>
-                                <select name="package_id" class="form-control">
-                                    <option value=""></option>
-                                    @foreach($packages as $package)
-                                    <option value="{{ $package->id }}" {{ $package->id == $user->package_id ? 'selected' : '' }}>{{ $package->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-label">@lang('Package ends at')</label>
-                                <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" name="package_ends_at" value="{{ $user->package_ends_at }}" placeholder="@lang('Package ends at')" data-target="#datetimepicker1"/>
-                                    <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label class="form-label">@lang('Number Users Invited')</label>
                                 <input type="text" name="user_invited" value="{{ $user->userHistoryInvite()->count() }}" class="form-control" disabled>
                             </div>
