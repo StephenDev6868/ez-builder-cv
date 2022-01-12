@@ -2,8 +2,12 @@
 
 namespace Modules\User\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\URL;
+use Modules\Ezinvite\Entities\HistoryInvite;
 use Modules\User\Http\Controllers\Controller;
 use Modules\User\Entities\User;
+use Modules\Ezinvite\Entities\HistoryCredit;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -116,9 +120,54 @@ class LoginController extends Controller
                 [
                     'name'          => $social->getName(),
                     'password'      => Hash::make(Str::random(40)),
-                    
+
                 ]
             );
+
+            if ($user->wasRecentlyCreated) {
+                $parsedUrl = parse_url(URL::previous());
+                if (isset($parsedUrl['query']) && strs_contain($parsedUrl['query'], 'refcode=')) {
+                    $refCode = str_replace('refcode=', '', $parsedUrl['query']);
+                    if (Cookie::has($refCode)) {
+                        $userR = User::query()
+                            ->where('refcode', $refCode)
+                            ->first();
+                        if (! $userR) {
+                            redirect()->route('register')
+                                ->with(['error' => 'User referral not found']);
+                        }
+
+                        $userR->credit = (int) $userR->credit + config('app.credit_refer');
+                        $userR->save();
+
+                        // Update history credit of user referral
+                        HistoryCredit::query()
+                            ->create([
+                                'user_id' => $userR->getKey(),
+                                'amount'  => config('app.credit_refer'),
+                                'type'    => 1,
+                                'status'  => 1,
+                                'done_at' => now(),
+                            ]);
+
+                        HistoryInvite::query()
+                            ->create([
+                                'user_id'     => $userR->getKey(),
+                                'new_user_id' => $user->getKey(),
+                            ]);
+                    };
+                }
+
+                // Update history credit of new user
+                HistoryCredit::query()
+                    ->create([
+                        'user_id' => $user->getKey(),
+                        'amount'  => config('app.default_credit'),
+                        'type'    => 4,
+                        'status'  => 1,
+                        'done_at' => now(),
+                    ]);
+            }
 
             Auth::login($user);
 
