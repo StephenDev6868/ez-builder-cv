@@ -106,40 +106,35 @@ class LoginController extends Controller
         if (!in_array($provider, $this->providers)) {
             return redirect()->route('login');
         }
-
         try {
 
             $social = Socialite::driver($provider)->user();
             if(!$social->getEmail()){
                 return redirect()->route('login')->with('error', __('You need update email on: ').$provider);
             }
-            $user = User::firstOrCreate(
-                [
-                    'email' => $social->getEmail(),
-                ],
-                [
-                    'name'          => $social->getName(),
+            $user = User::where('email',$social->getEmail())->first();
+            
+            if(!$user){
+
+                $max = User::query()->max('id');
+                $user = User::create([
+                    'name'          => '',
+                    'email'         => $social->getEmail(),
+                    'role'          => 'user',
                     'password'      => Hash::make(Str::random(40)),
-
-                ]
-            );
-
-            if ($user->wasRecentlyCreated) {
-                $parsedUrl = parse_url(URL::previous());
-                if (isset($parsedUrl['query']) && strs_contain($parsedUrl['query'], 'refcode=')) {
-                    $refCode = str_replace('refcode=', '', $parsedUrl['query']);
-                    if (Cookie::has($refCode)) {
-                        $userR = User::query()
-                            ->where('refcode', $refCode)
-                            ->first();
-                        if (! $userR) {
-                            redirect()->route('register')
-                                ->with(['error' => 'User referral not found']);
-                        }
-
+                    'refcode'       => ($max + 1) . str::random(9),
+                    'credit'        => config('app.default_credit'),
+                ]);
+                // Check referral
+                if (Cookie::has('resumecv_invite')) {
+                    $refCode = Cookie::get('resumecv_invite');
+                    $userR = User::query()
+                        ->where('refcode', $refCode)
+                        ->first();
+                    
+                        if ($userR) {
                         $userR->credit = (int) $userR->credit + config('app.credit_refer');
                         $userR->save();
-
                         // Update history credit of user referral
                         HistoryCredit::query()
                             ->create([
@@ -149,14 +144,14 @@ class LoginController extends Controller
                                 'status'  => 1,
                                 'done_at' => now(),
                             ]);
-
                         HistoryInvite::query()
                             ->create([
                                 'user_id'     => $userR->getKey(),
                                 'new_user_id' => $user->getKey(),
                             ]);
-                    };
-                }
+                    }
+                    
+                };
 
                 // Update history credit of new user
                 HistoryCredit::query()
@@ -166,9 +161,9 @@ class LoginController extends Controller
                         'type'    => 4,
                         'status'  => 1,
                         'done_at' => now(),
-                    ]);
+                ]);
             }
-
+            
             Auth::login($user);
 
             return redirect('/');

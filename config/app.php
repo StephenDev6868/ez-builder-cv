@@ -1779,9 +1779,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'default_credit' => env('DEFAULT_CREDIT'),
+    'default_credit' => env('DEFAULT_CREDIT', 100),
 
-    'credit_refer' => env('CREDIT_REFER'),
+    'credit_refer' => env('CREDIT_REFER', 100),
 
     /*
     |--------------------------------------------------------------------------

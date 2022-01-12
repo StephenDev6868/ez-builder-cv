@@ -88,7 +88,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="form-label">@lang('Credit')</label>
-                                <input type="text" name="credit" class="form-control" value="{{ config('app.default_credit' )}}" placeholder="@lang('Credit')">
+                                <input type="text" name="credit" class="form-control" value="{{ config('app.default_credit')}}" placeholder="@lang('Credit')">
                             </div>
                         </div>
                     </div>

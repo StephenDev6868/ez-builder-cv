@@ -97,31 +97,27 @@ class RegisterController extends Controller
     {
         $data['role'] = 'user';
         $max = User::query()->max('id');
+        
         $user = User::create([
             'name'          => '',
             'email'         => $data['email'],
             'role'          => $data['role'],
             'password'      => Hash::make($data['password']),
             'refcode'       => ($max + 1) . str::random(9),
-            'credit'        => 100,
+            'credit'        => config('app.default_credit'),
         ]);
         $user->notify((new UserRegistered())->onQueue('mail'));
-
-        $parsedUrl = parse_url(URL::previous());
-        if (isset($parsedUrl['query']) && strs_contain($parsedUrl['query'], 'refcode=')) {
-            $refCode = str_replace('refcode=', '', $parsedUrl['query']);
-            if (Cookie::has($refCode)) {
-                $userR = User::query()
-                    ->where('refcode', $refCode)
-                    ->first();
-                if (! $userR) {
-                    redirect()->route('register')
-                        ->with(['error' => 'User referral not found']);
-                }
-
+                
+        // Check referral
+        if (Cookie::has('resumecv_invite')) {
+            $refCode = Cookie::get('resumecv_invite');
+            $userR = User::query()
+                ->where('refcode', $refCode)
+                ->first();
+            
+                if ($userR) {
                 $userR->credit = (int) $userR->credit + config('app.credit_refer');
                 $userR->save();
-
                 // Update history credit of user referral
                 HistoryCredit::query()
                     ->create([
@@ -131,14 +127,13 @@ class RegisterController extends Controller
                         'status'  => 1,
                         'done_at' => now(),
                     ]);
-
                 HistoryInvite::query()
                     ->create([
-                       'user_id'     => $userR->getKey(),
-                       'new_user_id' => $user->getKey(),
+                        'user_id'     => $userR->getKey(),
+                        'new_user_id' => $user->getKey(),
                     ]);
-            };
-        }
+            }
+        };
 
         // Update history credit of new user
         HistoryCredit::query()
@@ -161,7 +156,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-
+        $refCode = Cookie::get('resumecv_invite');
         return view('themes::' . config('app.SITE_LANDING') . '.auth.register');
     }
 }

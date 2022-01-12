@@ -112,7 +112,6 @@ class UserController extends Controller
             'role'            => 'required|string|max:255',
             'email'           => 'required|email|unique:users,email,' . $user->id,
             'password'        => 'nullable|string|min:6|same:password_confirmation',
-            'package_ends_at' => 'nullable|date',
             'credit'          => 'required|numeric|min:0',
 
         ],[

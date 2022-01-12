@@ -131,8 +131,8 @@ class EzinviteController extends Controller
     */
     public function invite(Request $request)
     {
-        Cookie::queue($request->refcode, str::uuid(), 60);
-
-        return redirect()->route('register', "refcode={$request->refcode}");
+        $min = 21600; // 15 days
+        Cookie::queue('resumecv_invite', $request->refcode, $min);
+        return redirect()->route('register');
     }
 }
