@@ -10,9 +10,11 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="h3 mt-2 mb-0 text-gray-800">@lang('Share your link')</h1>
+                    <h4 class="h4 mt-2 mb-0 text-gray-800">
+                        @lang('Get :credit_refer credit',['credit_refer' => config('app.credit_refer')])
+                    </h4>
                     <p class="text-muted mt-3">
-                        @lang('Copy your personal referral link and share it with your friend and followers')
+                       @lang("Everyone you refer you'll get :credit_refer in credit. There is no limit to the amount of credit you can earn through referrals",['credit_refer' => config('app.credit_refer')])
                     </p>
                 </div>
                 <div class="card-body">
